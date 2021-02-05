@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:BurgerShop.ViewModel"
+             x:Class="BurgerShop.MainPage"  NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+    <Grid BackgroundColor="#FFFFFF" Padding="30, 40, 30, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>-->
+        
+        <Grid Grid.Row="0">
+            <Image Source="bMenu.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start" VerticalOptions="Start" />
+            <Image Source="cart.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="End" VerticalOptions="Start" />
+        </Grid>
+
+        <StackLayout Grid.Row="1">
+            <Label Text="ONLINE FOOD SERVICES" FontSize="34" FontAttributes="Bold" TextColor="#000"/>
+            <StackLayout Padding="0, 30, 0, 0">
+                <Entry Placeholder="Search" />
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout  Grid.Row="2" Spacing="10" Padding="0, 0, 0, 40">
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Headings}" Spacing="30">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Title}" FontSize="17"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+        <StackLayout  Grid.Row="3" Spacing="10" Padding="0, 0, 0, 40">
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Items}" Spacing="30">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <BoxView WidthRequest="130" HeightRequest="230" BackgroundColor="{Binding Color}" CornerRadius="20" />
+                                <Frame HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" CornerRadius="500" Margin="0, -100, 0, 0">
+                                    <Image Source="{Binding Image}" Aspect="AspectFill" />
+                                </Frame>
+                                <StackLayout Padding="0, 150, 0, 0" HorizontalOptions="Center">
+                                    <Label Text="{Binding Title}" FontSize="19" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Price}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+
+    </Grid>
+
+</ContentPage>
